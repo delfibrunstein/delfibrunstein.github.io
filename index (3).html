@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delfina Brunstein · Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8f04a;
+      --accent2: #4af0c8;
+      --text: #e8e8e0;
+      --muted: #888880;
+      --tag-bg: #1e1e1e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Nav */
+    nav {
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 0 5rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      max-width: 480px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.35s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.45s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: #d8ff5a;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+    }
+
+    /* Section */
+    section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .skill-group {
+      background: var(--surface);
+      padding: 1.5rem;
+    }
+
+    .skill-group h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Experience */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .exp-meta strong {
+      display: block;
+      color: var(--accent);
+      font-size: 0.75rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-content h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .exp-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .exp-content li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .exp-content li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .project-card:hover { background: #1a1a1a; }
+    .project-card:hover::after { width: 100%; }
+
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card.featured h3 { font-size: 1.35rem; }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-link:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .project-featured-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+
+    .stack-row {
+      display: flex;
+      gap: 1rem;
+      margin: 0.5rem 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stack-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent2);
+    }
+
+    /* Education */
+    .edu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .edu-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .edu-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      background: #1e2a10;
+      color: var(--accent);
+      border: 1px solid #3a4a20;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    /* Contact */
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <span class="nav-logo">DB · PORTFOLIO</span>
+    <ul class="nav-links">
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="border:none; padding-top:5rem;">
+    <p class="hero-eyebrow">Analista Funcional Jr · Data Analyst</p>
+    <h1>Delfina<br/><em>Brunstein</em></h1>
+    <p class="hero-desc">
+      Trabajo en el cruce entre los datos y los sistemas de negocio. SQL avanzado, análisis funcional y resolución de incidentes en entornos productivos. Buenos Aires, Argentina.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:delfibrun@gmail.com" class="btn btn-primary">↗ Contactame</a>
+      <a href="https://www.linkedin.com/in/delfinabrunstein/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <p class="section-label">// Habilidades técnicas</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Datos</h3>
+        <div class="tags">
+          <span class="tag">SQL avanzado</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>APIs & Backend</h3>
+        <div class="tags">
+          <span class="tag">REST APIs</span>
+          <span class="tag">Postman</span>
+          <span class="tag">Express.js</span>
+          <span class="tag">PHP</span>
+          <span class="tag">JSON</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Herramientas</h3>
+        <div class="tags">
+          <span class="tag">Git</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Trello</span>
+          <span class="tag">MS Project</span>
+          <span class="tag">InvGate</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Análisis funcional</h3>
+        <div class="tags">
+          <span class="tag">Requerimientos</span>
+          <span class="tag">Documentación</span>
+          <span class="tag">Causa raíz</span>
+          <span class="tag">Testing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="reveal">
+    <p class="section-label">// Experiencia profesional</p>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <strong>Actual</strong>
+        Gilera Motors S.A.
+      </div>
+      <div class="exp-content">
+        <h3>Analista Funcional Jr</h3>
+        <p class="exp-company">Gilera Motors S.A.</p>
+        <ul>
+          <li>SQL avanzado para validación, análisis y corrección de datos en producción</li>
+          <li>Análisis funcional sobre sistemas empresariales (Kaitsoft, Cygnus) de punta a punta</li>
+          <li>Resolución de incidentes críticos con impacto en facturación y stock</li>
+          <li>Testing de APIs y validación de flujos de información entre sistemas</li>
+          <li>Relevamiento de requerimientos con áreas de Finanzas, Compras, RRHH y Comercial</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <strong>Anterior</strong>
+        Gilera Motors S.A.
+      </div>
+      <div class="exp-content">
+        <h3>Pasantía Project Manager</h3>
+        <p class="exp-company">Gilera Motors S.A.</p>
+        <ul>
+          <li>Seguimiento de proyectos de implementación y desarrollo interno</li>
+          <li>Coordinación con equipos técnicos y de negocio</li>
+          <li>Gestión con Trello, Microsoft Project y Excel</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <strong>Anterior</strong>
+        Grupo Codylsa
+      </div>
+      <div class="exp-content">
+        <h3>Soporte IT</h3>
+        <p class="exp-company">Grupo Codylsa</p>
+        <ul>
+          <li>Resolución de incidentes de hardware, software y soporte a usuarios</li>
+          <li>Gestión y resolución de tickets en entornos corporativos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="reveal">
+    <p class="section-label">// Proyectos</p>
+    <div class="projects-grid">
+
+      <!-- FEATURED: E-Commerce Arte -->
+      <div class="project-card featured">
+        <span class="project-featured-badge">Proyecto destacado</span>
+        <h3>E-Commerce de Arte</h3>
+        <p>Plataforma fullstack para la compra y venta de obras de arte originales. Incluye autenticación JWT con roles Admin/Usuario, catálogo con filtros, carrito, wishlist, gestión de pedidos y panel de artistas. Desplegable con Docker Compose.</p>
+        <div class="stack-row">
+          <span class="stack-item">Spring Boot 3</span>
+          <span class="stack-item">React 18</span>
+          <span class="stack-item">JWT</span>
+          <span class="stack-item">MySQL</span>
+          <span class="stack-item">Docker</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Fullstack</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Autenticación</span>
+          <span class="tag">Docker</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/TPO-Ecommerce-Back" target="_blank" class="project-link">↗ Backend</a>
+          <a href="https://github.com/delfibrunstein/TPO-Ecommerce-Front" target="_blank" class="project-link">↗ Frontend</a>
+        </div>
+      </div>
+
+      <!-- Brain Planner -->
+      <div class="project-card">
+        <h3>Brain Planner</h3>
+        <p>Sistema fullstack para la gestión de horarios académicos. Permite administrar profesores, materias y cursos, y armar grillas horarias de forma visual e interactiva por bloques.</p>
+        <div class="stack-row">
+          <span class="stack-item">React 18</span>
+          <span class="stack-item">Express.js</span>
+          <span class="stack-item">MySQL</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Fullstack</span>
+          <span class="tag">REST API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/restapi" target="_blank" class="project-link">↗ Backend</a>
+          <a href="https://github.com/delfibrunstein/horarios" target="_blank" class="project-link">↗ Frontend</a>
+        </div>
+      </div>
+
+      <!-- TPO Programación II -->
+      <div class="project-card">
+        <h3>Estructuras de datos</h3>
+        <p>Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.</p>
+        <div class="stack-row">
+          <span class="stack-item">Java</span>
+          <span class="stack-item">OOP</span>
+          <span class="stack-item">TDAs</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Académico</span>
+          <span class="tag">Algoritmos</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/TPO-programacion-II" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section id="educacion" class="reveal">
+    <p class="section-label">// Educación</p>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div>
+          <div class="edu-title">Licenciatura en Gestión de Tecnologías de la Información</div>
+          <div class="edu-sub">UADE · 2023 – Actualidad</div>
+        </div>
+        <span class="edu-badge">En curso</span>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-title">Bachiller con orientación en TIC</div>
+          <div class="edu-sub">ORT Argentina · 2018 – 2022</div>
+        </div>
+        <span class="edu-badge">🏅 Honores</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="reveal">
+    <p class="section-label">// Contacto</p>
+    <p style="color:var(--muted); margin-bottom:1.5rem; font-size:0.95rem;">
+      Abierta a nuevas oportunidades. No dudes en escribirme.
+    </p>
+    <div class="contact-row">
+      <a href="mailto:delfibrun@gmail.com" class="btn btn-primary">delfibrun@gmail.com</a>
+      <a href="https://www.linkedin.com/in/delfinabrunstein/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Delfina Brunstein · Buenos Aires, Argentina</span>
+    <span>Español · Inglés intermedio</span>
+  </footer>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
