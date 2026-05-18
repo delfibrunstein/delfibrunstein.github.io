@@ -302,6 +302,10 @@
       border: 1px solid var(--border);
     }
 
+    .project-card.featured {
+      grid-column: 1 / -1;
+    }
+
     .project-card {
       background: var(--surface);
       padding: 2rem;
@@ -329,11 +333,60 @@
       margin-bottom: 0.5rem;
     }
 
+    .project-card.featured h3 { font-size: 1.35rem; }
+
     .project-card p {
       font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 1rem;
       line-height: 1.5;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    .project-featured-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+
+    .stack-row {
+      display: flex;
+      gap: 1rem;
+      margin: 0.5rem 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stack-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent2);
     }
 
     /* Education */
@@ -440,7 +493,7 @@
     </p>
     <div class="hero-cta">
       <a href="mailto:delfibrun@gmail.com" class="btn btn-primary">↗ Contactame</a>
-      <a href="https://www.linkedin.com/in/delfinabrunstein/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+      <a href="https://linkedin.com/in/delfina-brunstein" target="_blank" class="btn btn-ghost">LinkedIn</a>
     </div>
   </section>
 
@@ -548,23 +601,68 @@
   <section id="proyectos" class="reveal">
     <p class="section-label">// Proyectos</p>
     <div class="projects-grid">
-      <div class="project-card">
-        <h3>Sistema de asistencia para discapacidad visual</h3>
-        <p>Solución orientada a accesibilidad desarrollada como proyecto académico en ORT Argentina.</p>
+
+      <!-- FEATURED: E-Commerce Arte -->
+      <div class="project-card featured">
+        <span class="project-featured-badge">Proyecto destacado</span>
+        <h3>E-Commerce de Arte</h3>
+        <p>Plataforma fullstack para la compra y venta de obras de arte originales. Incluye autenticación JWT con roles Admin/Usuario, catálogo con filtros, carrito, wishlist, gestión de pedidos y panel de artistas. Desplegable con Docker Compose.</p>
+        <div class="stack-row">
+          <span class="stack-item">Spring Boot 3</span>
+          <span class="stack-item">React 18</span>
+          <span class="stack-item">JWT</span>
+          <span class="stack-item">MySQL</span>
+          <span class="stack-item">Docker</span>
+        </div>
         <div class="tags">
-          <span class="tag">C#</span>
-          <span class="tag">Accesibilidad</span>
+          <span class="tag">Fullstack</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Autenticación</span>
+          <span class="tag">Docker</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/TPO-Ecommerce-Back" target="_blank" class="project-link">↗ Backend</a>
+          <a href="https://github.com/delfibrunstein/TPO-Ecommerce-Front" target="_blank" class="project-link">↗ Frontend</a>
         </div>
       </div>
+
+      <!-- Brain Planner -->
       <div class="project-card">
-        <h3>API REST – Plataforma deportiva</h3>
-        <p>Backend con endpoints RESTful y gestión de base de datos relacional para plataforma deportiva.</p>
+        <h3>Brain Planner</h3>
+        <p>Sistema fullstack para la gestión de horarios académicos. Permite administrar profesores, materias y cursos, y armar grillas horarias de forma visual e interactiva por bloques.</p>
+        <div class="stack-row">
+          <span class="stack-item">React 18</span>
+          <span class="stack-item">Express.js</span>
+          <span class="stack-item">MySQL</span>
+        </div>
         <div class="tags">
-          <span class="tag">PHP</span>
-          <span class="tag">Express.js</span>
-          <span class="tag">MySQL</span>
+          <span class="tag">Fullstack</span>
+          <span class="tag">REST API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/restapi" target="_blank" class="project-link">↗ Backend</a>
+          <a href="https://github.com/delfibrunstein/horarios" target="_blank" class="project-link">↗ Frontend</a>
         </div>
       </div>
+
+      <!-- TPO Programación II -->
+      <div class="project-card">
+        <h3>Estructuras de datos</h3>
+        <p>Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.</p>
+        <div class="stack-row">
+          <span class="stack-item">Java</span>
+          <span class="stack-item">OOP</span>
+          <span class="stack-item">TDAs</span>
+        </div>
+        <div class="tags">
+          <span class="tag">Académico</span>
+          <span class="tag">Algoritmos</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/delfibrunstein/TPO-programacion-II" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
