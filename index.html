@@ -879,12 +879,15 @@
     skillGroups[2].textContent = t.skillTools;
     skillGroups[3].textContent = t.skillAnalysis;
 
-    // Skill tags (only the translatable ones)
-    const allTags = document.querySelectorAll('#skills .tag');
-    allTags[0].textContent = t.tagSQLAdv;
-    allTags[5].textContent = t.tagReq;
-    allTags[6].textContent = t.tagDoc;
-    allTags[7].textContent = t.tagRoot;
+    // Skill tags
+    const skillGroupTags = document.querySelectorAll('.skill-group');
+    // Grupo 0: Datos - primer tag es SQL avanzado
+    skillGroupTags[0].querySelectorAll('.tag')[0].textContent = t.tagSQLAdv;
+    // Grupo 3: Análisis funcional
+    const analysisTags = skillGroupTags[3].querySelectorAll('.tag');
+    analysisTags[0].textContent = t.tagReq;
+    analysisTags[1].textContent = t.tagDoc;
+    analysisTags[2].textContent = t.tagRoot;
 
     // Experience
     document.querySelector('#experiencia .section-label').textContent = t.expLabel;
