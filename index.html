@@ -783,6 +783,10 @@
       tagAuth: 'Autenticación',
       projDesc2: 'Sistema fullstack para la gestión de horarios académicos. Permite administrar profesores, materias y cursos, y armar grillas horarias de forma visual e interactiva por bloques.',
       projDesc3: 'Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.',
+      projTitle1: 'E-Commerce de Arte',
+      projTitle2: 'Brain Planner',
+      projTitle3: 'Estructuras de datos',
+      tagSQLAdv: 'SQL avanzado',
       tagAcad: 'Académico',
       tagAlg: 'Algoritmos',
       eduLabel: '// Educación',
@@ -832,6 +836,10 @@
       tagAuth: 'Authentication',
       projDesc2: 'Fullstack system for academic schedule management. Allows managing teachers, subjects and courses, and building interactive timetable grids by time blocks.',
       projDesc3: 'From-scratch implementation of Priority Queue and Set with their respective ADTs, in object-oriented Java.',
+      projTitle1: 'Art E-Commerce',
+      projTitle2: 'Brain Planner',
+      projTitle3: 'Data Structures',
+      tagSQLAdv: 'Advanced SQL',
       tagAcad: 'Academic',
       tagAlg: 'Algorithms',
       eduLabel: '// Education',
@@ -873,6 +881,7 @@
 
     // Skill tags (only the translatable ones)
     const allTags = document.querySelectorAll('#skills .tag');
+    allTags[0].textContent = t.tagSQLAdv;
     allTags[5].textContent = t.tagReq;
     allTags[6].textContent = t.tagDoc;
     allTags[7].textContent = t.tagRoot;
@@ -901,6 +910,10 @@
 
     // Projects
     document.querySelector('#proyectos .section-label').textContent = t.projLabel;
+    const projTitles = document.querySelectorAll('.project-card h3');
+    projTitles[0].textContent = t.projTitle1;
+    projTitles[1].textContent = t.projTitle2;
+    projTitles[2].textContent = t.projTitle3;
     document.querySelector('.project-featured-badge').textContent = t.projBadge;
     const projDescs = document.querySelectorAll('.project-card p');
     projDescs[0].textContent = t.projDesc1;
@@ -924,7 +937,8 @@
 
     // Contact
     document.querySelector('#contacto .section-label').textContent = t.contactLabel;
-    document.querySelector('#contacto p').textContent = t.contactDesc;
+    const contactP = document.querySelector('#contacto p[style]');
+    if (contactP) contactP.textContent = t.contactDesc;
 
     // Footer
     document.querySelector('footer span:last-child').textContent = t.footerLang;
