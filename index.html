@@ -78,6 +78,23 @@
 
     .nav-links a:hover { color: var(--text); }
 
+    .lang-toggle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-toggle:hover, .lang-toggle.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* Hero */
     .hero {
       padding: 6rem 0 5rem;
@@ -484,10 +501,11 @@
   <nav>
     <span class="nav-logo">DB · PORTFOLIO</span>
     <ul class="nav-links">
-      <li><a href="#experiencia">Experiencia</a></li>
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#experiencia" data-es="Experiencia" data-en="Experience">Experiencia</a></li>
+      <li><a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+      <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
     </ul>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">English</button>
   </nav>
 
   <!-- HERO -->
@@ -723,6 +741,194 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+
+  // Language toggle
+  let currentLang = 'es';
+
+  const translations = {
+    es: {
+      navExperiencia: 'Experiencia',
+      navProyectos: 'Proyectos',
+      navContacto: 'Contacto',
+      eyebrow: 'Analista Funcional Jr · Data Analyst',
+      heroDesc: 'Trabajo en el cruce entre los datos y los sistemas de negocio. SQL avanzado, análisis funcional y resolución de incidentes en entornos productivos. Buenos Aires, Argentina.',
+      ctaContact: '↗ Contactame',
+      skillsLabel: '// Habilidades técnicas',
+      skillData: 'Datos',
+      skillAPIs: 'APIs & Backend',
+      skillTools: 'Herramientas',
+      skillAnalysis: 'Análisis funcional',
+      tagReq: 'Requerimientos',
+      tagDoc: 'Documentación',
+      tagRoot: 'Causa raíz',
+      expLabel: '// Experiencia profesional',
+      expCurrent: 'Actual',
+      expPrev: 'Anterior',
+      expTitle1: 'Analista Funcional Jr',
+      expLi1_1: 'SQL avanzado para validación, análisis y corrección de datos en producción',
+      expLi1_2: 'Análisis funcional sobre sistemas empresariales (Kaitsoft, Cygnus) de punta a punta',
+      expLi1_3: 'Resolución de incidentes críticos con impacto en facturación y stock',
+      expLi1_4: 'Testing de APIs y validación de flujos de información entre sistemas',
+      expLi1_5: 'Relevamiento de requerimientos con áreas de Finanzas, Compras, RRHH y Comercial',
+      expTitle2: 'Pasantía Project Manager',
+      expLi2_1: 'Seguimiento de proyectos de implementación y desarrollo interno',
+      expLi2_2: 'Coordinación con equipos técnicos y de negocio',
+      expLi2_3: 'Gestión con Trello, Microsoft Project y Excel',
+      expTitle3: 'Soporte IT',
+      expLi3_1: 'Resolución de incidentes de hardware, software y soporte a usuarios',
+      expLi3_2: 'Gestión y resolución de tickets en entornos corporativos',
+      projLabel: '// Proyectos',
+      projBadge: 'Proyecto destacado',
+      projDesc1: 'Plataforma fullstack para la compra y venta de obras de arte originales. Incluye autenticación JWT con roles Admin/Usuario, catálogo con filtros, carrito, wishlist, gestión de pedidos y panel de artistas. Desplegable con Docker Compose.',
+      tagAuth: 'Autenticación',
+      projDesc2: 'Sistema fullstack para la gestión de horarios académicos. Permite administrar profesores, materias y cursos, y armar grillas horarias de forma visual e interactiva por bloques.',
+      projDesc3: 'Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.',
+      tagAcad: 'Académico',
+      tagAlg: 'Algoritmos',
+      eduLabel: '// Educación',
+      eduTitle1: 'Licenciatura en Gestión de Tecnologías de la Información',
+      eduSub1: 'UADE · 2023 – Actualidad',
+      eduBadge1: 'En curso',
+      eduTitle2: 'Bachiller con orientación en TIC',
+      eduSub2: 'ORT Argentina · 2018 – 2022',
+      contactLabel: '// Contacto',
+      contactDesc: 'Abierta a nuevas oportunidades. No dudes en escribirme.',
+      footerLang: 'Español · Inglés intermedio',
+    },
+    en: {
+      navExperiencia: 'Experience',
+      navProyectos: 'Projects',
+      navContacto: 'Contact',
+      eyebrow: 'Jr Functional Analyst · Data Analyst',
+      heroDesc: 'I work at the intersection of data and business systems. Advanced SQL, functional analysis and incident resolution in production environments. Buenos Aires, Argentina.',
+      ctaContact: '↗ Contact me',
+      skillsLabel: '// Technical skills',
+      skillData: 'Data',
+      skillAPIs: 'APIs & Backend',
+      skillTools: 'Tools',
+      skillAnalysis: 'Functional analysis',
+      tagReq: 'Requirements',
+      tagDoc: 'Documentation',
+      tagRoot: 'Root cause analysis',
+      expLabel: '// Professional experience',
+      expCurrent: 'Current',
+      expPrev: 'Previous',
+      expTitle1: 'Jr Functional Analyst',
+      expLi1_1: 'Advanced SQL for data validation, analysis and correction in production',
+      expLi1_2: 'End-to-end functional analysis of enterprise systems (Kaitsoft, Cygnus)',
+      expLi1_3: 'Resolution of critical incidents impacting billing and stock',
+      expLi1_4: 'API testing and information flow validation between systems',
+      expLi1_5: 'Requirements gathering across Finance, Purchasing, HR and Commercial teams',
+      expTitle2: 'Project Manager Intern',
+      expLi2_1: 'Tracking implementation and internal development projects',
+      expLi2_2: 'Coordination with technical and business teams',
+      expLi2_3: 'Task management using Trello, Microsoft Project and Excel',
+      expTitle3: 'IT Support',
+      expLi3_1: 'Hardware, software and user incident resolution',
+      expLi3_2: 'Ticket management and resolution in corporate environments',
+      projLabel: '// Projects',
+      projBadge: 'Featured project',
+      projDesc1: 'Fullstack platform for buying and selling original artworks. Includes JWT authentication with Admin/User roles, filtered catalog, cart, wishlist, order management and artist panel. Deployable with Docker Compose.',
+      tagAuth: 'Authentication',
+      projDesc2: 'Fullstack system for academic schedule management. Allows managing teachers, subjects and courses, and building interactive timetable grids by time blocks.',
+      projDesc3: 'From-scratch implementation of Priority Queue and Set with their respective ADTs, in object-oriented Java.',
+      tagAcad: 'Academic',
+      tagAlg: 'Algorithms',
+      eduLabel: '// Education',
+      eduTitle1: "Bachelor's in Information Technology Management",
+      eduSub1: 'UADE · 2023 – Present',
+      eduBadge1: 'In progress',
+      eduTitle2: 'High school diploma with ICT specialization',
+      eduSub2: 'ORT Argentina · 2018 – 2022',
+      contactLabel: '// Contact',
+      contactDesc: 'Open to new opportunities. Feel free to reach out.',
+      footerLang: 'Spanish · Intermediate English',
+    }
+  };
+
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    const t = translations[currentLang];
+    const btn = document.getElementById('langBtn');
+    btn.textContent = currentLang === 'es' ? 'English' : 'Español';
+
+    // Nav links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks[0].textContent = t.navExperiencia;
+    navLinks[1].textContent = t.navProyectos;
+    navLinks[2].textContent = t.navContacto;
+
+    // Hero
+    document.querySelector('.hero-eyebrow').textContent = t.eyebrow;
+    document.querySelector('.hero-desc').textContent = t.heroDesc;
+    document.querySelector('.hero-cta .btn-primary').textContent = t.ctaContact;
+
+    // Skills
+    document.querySelector('#skills .section-label').textContent = t.skillsLabel;
+    const skillGroups = document.querySelectorAll('.skill-group h3');
+    skillGroups[0].textContent = t.skillData;
+    skillGroups[1].textContent = t.skillAPIs;
+    skillGroups[2].textContent = t.skillTools;
+    skillGroups[3].textContent = t.skillAnalysis;
+
+    // Skill tags (only the translatable ones)
+    const allTags = document.querySelectorAll('#skills .tag');
+    allTags[5].textContent = t.tagReq;
+    allTags[6].textContent = t.tagDoc;
+    allTags[7].textContent = t.tagRoot;
+
+    // Experience
+    document.querySelector('#experiencia .section-label').textContent = t.expLabel;
+    const expMetas = document.querySelectorAll('.exp-meta strong');
+    expMetas[0].textContent = t.expCurrent;
+    expMetas[1].textContent = t.expPrev;
+    expMetas[2].textContent = t.expPrev;
+    const expTitles = document.querySelectorAll('.exp-content h3');
+    expTitles[0].textContent = t.expTitle1;
+    expTitles[1].textContent = t.expTitle2;
+    expTitles[2].textContent = t.expTitle3;
+    const allLis = document.querySelectorAll('.exp-content li');
+    allLis[0].textContent = t.expLi1_1;
+    allLis[1].textContent = t.expLi1_2;
+    allLis[2].textContent = t.expLi1_3;
+    allLis[3].textContent = t.expLi1_4;
+    allLis[4].textContent = t.expLi1_5;
+    allLis[5].textContent = t.expLi2_1;
+    allLis[6].textContent = t.expLi2_2;
+    allLis[7].textContent = t.expLi2_3;
+    allLis[8].textContent = t.expLi3_1;
+    allLis[9].textContent = t.expLi3_2;
+
+    // Projects
+    document.querySelector('#proyectos .section-label').textContent = t.projLabel;
+    document.querySelector('.project-featured-badge').textContent = t.projBadge;
+    const projDescs = document.querySelectorAll('.project-card p');
+    projDescs[0].textContent = t.projDesc1;
+    projDescs[1].textContent = t.projDesc2;
+    projDescs[2].textContent = t.projDesc3;
+    const projTags = document.querySelectorAll('.project-card .tag');
+    projTags[2].textContent = t.tagAuth;
+    projTags[6].textContent = t.tagAcad;
+    projTags[7].textContent = t.tagAlg;
+
+    // Education
+    document.querySelector('#educacion .section-label').textContent = t.eduLabel;
+    const eduTitles = document.querySelectorAll('.edu-title');
+    eduTitles[0].textContent = t.eduTitle1;
+    eduTitles[1].textContent = t.eduTitle2;
+    const eduSubs = document.querySelectorAll('.edu-sub');
+    eduSubs[0].textContent = t.eduSub1;
+    eduSubs[1].textContent = t.eduSub2;
+    const eduBadges = document.querySelectorAll('.edu-badge');
+    eduBadges[0].textContent = t.eduBadge1;
+
+    // Contact
+    document.querySelector('#contacto .section-label').textContent = t.contactLabel;
+    document.querySelector('#contacto p').textContent = t.contactDesc;
+
+    // Footer
+    document.querySelector('footer span:last-child').textContent = t.footerLang;
+  }
 </script>
 </body>
 </html>
