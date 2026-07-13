@@ -688,23 +688,7 @@
         </div>
       </div>
 
-      <!-- TPO Programación II -->
-      <div class="project-card">
-        <h3>Estructuras de datos</h3>
-        <p>Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.</p>
-        <div class="stack-row">
-          <span class="stack-item">Java</span>
-          <span class="stack-item">OOP</span>
-          <span class="stack-item">TDAs</span>
-        </div>
-        <div class="tags">
-          <span class="tag">Académico</span>
-          <span class="tag">Algoritmos</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/delfibrunstein/TPO-programacion-II" target="_blank" class="project-link">↗ GitHub</a>
-        </div>
-      </div>
+
 
     </div>
   </section>
@@ -802,16 +786,10 @@
       tagAuth: 'Autenticación',
       projDesc2: 'Agente conversacional interno que traduce preguntas en lenguaje natural a queries T-SQL, las ejecuta en tiempo real y devuelve resultados con tablas y gráficos interactivos. Incluye login, roles Admin/Usuario, historial y rotación automática de modelos LLM.',
       projDesc3: 'Sistema fullstack para la gestión de horarios académicos. Permite administrar profesores, materias y cursos, y armar grillas horarias de forma visual e interactiva por bloques.',
-      projDesc4: 'Implementación desde cero de Cola de Prioridad y Conjunto con sus respectivos TDAs, en Java orientado a objetos.',
       projTitle1: 'E-Commerce de Arte',
       projTitle2: 'SQL Agent',
       projTitle3: 'Brain Planner',
-      projTitle4: 'Estructuras de datos',
       tagSQLAdv: 'SQL avanzado',
-      tagNLP: 'NLP',
-      tagLLM: 'LLM',
-      tagInterno: 'Uso interno',
-      tagAcad: 'Académico',
       tagAlg: 'Algoritmos',
       eduLabel: '// Educación',
       eduTitle1: 'Licenciatura en Gestión de Tecnologías de la Información',
@@ -860,16 +838,10 @@
       tagAuth: 'Authentication',
       projDesc2: 'Internal conversational agent that translates natural language questions into T-SQL queries, executes them in real time and returns results with tables and interactive charts. Includes login, Admin/User roles, conversation history and automatic LLM model rotation.',
       projDesc3: 'Fullstack system for academic schedule management. Allows managing teachers, subjects and courses, and building interactive timetable grids by time blocks.',
-      projDesc4: 'From-scratch implementation of Priority Queue and Set with their respective ADTs, in object-oriented Java.',
       projTitle1: 'Art E-Commerce',
       projTitle2: 'SQL Agent',
       projTitle3: 'Brain Planner',
-      projTitle4: 'Data Structures',
       tagSQLAdv: 'Advanced SQL',
-      tagNLP: 'NLP',
-      tagLLM: 'LLM',
-      tagInterno: 'Internal tool',
-      tagAcad: 'Academic',
       tagAlg: 'Algorithms',
       eduLabel: '// Education',
       eduTitle1: "Bachelor's in Information Technology Management",
@@ -946,21 +918,17 @@
     projTitles[0].textContent = t.projTitle1;
     projTitles[1].textContent = t.projTitle2;
     projTitles[2].textContent = t.projTitle3;
-    projTitles[3].textContent = t.projTitle4;
     document.querySelector('.project-featured-badge').textContent = t.projBadge;
     const projDescs = document.querySelectorAll('.project-card p');
     projDescs[0].textContent = t.projDesc1;
     projDescs[1].textContent = t.projDesc2;
     projDescs[2].textContent = t.projDesc3;
-    projDescs[3].textContent = t.projDesc4;
     // Tags por card
     const cards = document.querySelectorAll('.project-card');
     cards[0].querySelectorAll('.tag')[2].textContent = t.tagAuth;
     cards[1].querySelectorAll('.tag')[0].textContent = t.tagNLP;
     cards[1].querySelectorAll('.tag')[1].textContent = t.tagLLM;
     cards[1].querySelectorAll('.tag')[2].textContent = t.tagInterno;
-    cards[3].querySelectorAll('.tag')[0].textContent = t.tagAcad;
-    cards[3].querySelectorAll('.tag')[1].textContent = t.tagAlg;
 
     // Education
     document.querySelector('#educacion .section-label').textContent = t.eduLabel;
